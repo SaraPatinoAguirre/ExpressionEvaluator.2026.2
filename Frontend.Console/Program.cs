@@ -1,13 +1,26 @@
 ﻿using Backend;
 
-var infix = "4*5/(4+6)";
-Console.WriteLine($"Infix = {infix}, Result = {ExpressionEvaluator.Evalute(infix):N5}"); // 2
+Console.WriteLine("Function Evaluator");
+Console.WriteLine("Escribe una expresión matemática que desees");
+Console.WriteLine("Escribe 'salir' para cerrar la aplicación.\n");
 
-var infix2 = "4*(5+6-(8/2^3)-7)-1";
-Console.WriteLine($"Infix = {infix2}, Result = {ExpressionEvaluator.Evalute(infix2):N5}"); // 11
+while (true)
+{
+    Console.Write("Ingresa la operación: ");
+    string input = Console.ReadLine();
 
-var infix3 = "4*7^(1/3)*7*((1+9)/3*7^4)";
-Console.WriteLine($"Infix = {infix3}, Result = {ExpressionEvaluator.Evalute(infix3):N5}"); // 428,675.12518474100 
+    if (string.IsNullOrWhiteSpace(input) || input.ToLower() == "salir")
+    {
+        break;
+    }
 
-var infix4 = "144^(1/2)";
-Console.WriteLine($"Infix = {infix4}, Result = {ExpressionEvaluator.Evalute(infix4):N5}"); // 12
+    try
+    {
+        double resultado = ExpressionEvaluator.Evalute(input);
+        Console.WriteLine($"-> Resultado: {resultado}\n");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"-> Error: Expresión inválida o mal escrita. ({ex.Message})\n");
+    }
+}
